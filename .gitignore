@@ -39,3 +39,6 @@ package-lock.json
 
 #Enviroment
 .env
+
+# Docker Compose - file with environments
+docker-compose.yml
