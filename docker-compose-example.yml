@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  database-soat:
+    image: postgres
+    container_name: database-soat
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=<DATABASE_USER>
+      - POSTGRES_PASSWORD=<DATABASE_PASSWORD>
+      - POSTGRES_DB=<DATABASE_NAME>
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
+
+networks: 
+  default: 
+    name: soat-network
