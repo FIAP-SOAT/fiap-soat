@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   database-soat:
     image: postgres
@@ -12,11 +10,27 @@ services:
       - POSTGRES_DB=<DATABASE_NAME>
     volumes:
       - pgdata:/data/postgres
+    networks:
+      - soat-network
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "<PG_LOGIN>"
+      PGADMIN_DEFAULT_PASSWORD: "<PG_PASSWORD>"
+    ports:
+      - "16543:80"
+    depends_on:
+      - database-soat
+    networks:
+      - soat-network
 
 volumes:
   pgdata:
     driver: local
 
 networks: 
-  default: 
-    name: soat-network
+  soat-network:
+    driver: bridge
+
+
