@@ -17,6 +17,6 @@ import { PrismaService } from './prisma/prisma.service';
       useClass: PrismaProductsRepository,
     },
   ],
-  exports: [CategoriesRepository, ProductsRepository],
+  exports: [PrismaService, CategoriesRepository, ProductsRepository],
 })
 export class DatabaseModule {}
