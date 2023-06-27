@@ -14,4 +14,16 @@ export class ClientPersistenceAdapter implements ClientPersistencePort {
 
     return entity;
   }
+
+  async findById(id: string): Promise<Client> {
+    const client = await this.prisma.client.findUnique({
+      where: { id },
+    });
+
+    if (!client) {
+      return null;
+    }
+
+    return client;
+  }
 }

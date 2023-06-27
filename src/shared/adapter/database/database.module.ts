@@ -4,6 +4,10 @@ import { CategoriesRepository } from '@modules/products/application/ports/catego
 import { ProductsRepository } from '@modules/products/application/ports/productsRepository';
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
+import { ClientPersistenceAdapter } from '@modules/client/adapter/client-persistence.adapter';
+import { ClientPersistencePort } from '@modules/client/applications/ports/client-persistence.port';
+import { OrdersRepository } from '@modules/orders/application/ports/ordersRepository';
+import { PrismaOrdersRepository } from '@modules/orders/adapter/persistance/database/prisma/repositories/prismaOrdersRepository';
 
 @Module({
   providers: [
@@ -16,7 +20,21 @@ import { PrismaService } from './prisma/prisma.service';
       provide: ProductsRepository,
       useClass: PrismaProductsRepository,
     },
+    {
+      provide: ClientPersistencePort,
+      useClass: ClientPersistenceAdapter,
+    },
+    {
+      provide: OrdersRepository,
+      useClass: PrismaOrdersRepository,
+    },
   ],
-  exports: [PrismaService, CategoriesRepository, ProductsRepository],
+  exports: [
+    PrismaService,
+    CategoriesRepository,
+    ProductsRepository,
+    ClientPersistencePort,
+    OrdersRepository,
+  ],
 })
 export class DatabaseModule {}
