@@ -8,6 +8,8 @@ import { RemoveProductUseCase } from './application/services/removeProductUseCas
 import { UpdateProductUseCase } from './application/services/updateProductUseCase';
 import { ListCategoriesController } from './adapter/http/controllers/listCategories.controller';
 import { ListCategoriesUseCase } from './application/services/listCategoriesUseCase';
+import { ListProductsByCategoryController } from './adapter/http/controllers/listProductsByCategory.controller';
+import { ListProductsByCategoryUseCase } from './application/services/listProductsByCategoryUseCase';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,12 +18,14 @@ import { ListCategoriesUseCase } from './application/services/listCategoriesUseC
     UpdateProductController,
     RemoveProductController,
     ListCategoriesController,
+    ListProductsByCategoryController,
   ],
   providers: [
     CreateProductUseCase,
     UpdateProductUseCase,
     RemoveProductUseCase,
     ListCategoriesUseCase,
+    ListProductsByCategoryUseCase,
   ],
 })
 export class ProductsModule {}
