@@ -24,7 +24,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
   async listByCategory(categoryId: string): Promise<Product[]> {
     const products = this.products.filter(
-      (product) => product.category.id === categoryId,
+      (product) => product.category.id === categoryId && product.isActive,
     );
 
     return products;
