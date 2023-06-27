@@ -21,4 +21,12 @@ export class InMemoryProductsRepository implements ProductsRepository {
       this.products[productIndex] = product;
     }
   }
+
+  async listByCategory(categoryId: string): Promise<Product[]> {
+    const products = this.products.filter(
+      (product) => product.category.id === categoryId,
+    );
+
+    return products;
+  }
 }
