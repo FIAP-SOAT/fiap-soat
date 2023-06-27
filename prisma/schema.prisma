@@ -12,7 +12,7 @@ datasource db {
 
 model Category {
   id         String    @id @default(uuid())
-  name       String
+  name       String    @unique
   created_at DateTime  @default(now())
   Product    Product[]
 
@@ -48,7 +48,7 @@ model Client {
 
 model Status {
   id          String   @id @default(uuid())
-  description String
+  description String   @unique
   created_at  DateTime @default(now())
   Order       Order[]
 
