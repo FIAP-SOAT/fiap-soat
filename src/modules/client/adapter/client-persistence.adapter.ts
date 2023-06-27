@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '@shared/adapter/database/prisma/prisma.service';
 import { ClientPersistencePort } from '../applications/ports/client-persistence.port';
 import { Client } from '../domain/client';
 
