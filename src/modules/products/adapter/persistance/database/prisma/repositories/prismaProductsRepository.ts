@@ -37,4 +37,16 @@ export class PrismaProductsRepository implements ProductsRepository {
       data: raw,
     });
   }
+
+  async listByCategory(categoryId: string): Promise<Product[]> {
+    const products = await this.prisma.product.findMany({
+      where: {
+        category_id: categoryId,
+        is_active: true,
+      },
+      include: { category: true },
+    });
+
+    return products.map(PrismaProductMapper.toDomain);
+  }
 }
