@@ -1,4 +1,4 @@
-export class SaveClientCommand {
+export class CreateClientCommand {
   constructor(
     readonly name: string,
     readonly cpf: string,

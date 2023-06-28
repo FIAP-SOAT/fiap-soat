@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
-import { ClientController } from './adapter/client.controller';
-import { SaveClientUseCase } from './applications/ports/saveClient.use-case';
-import { SaveClientService } from './applications/services/save-client.service';
-import { ClientPersistencePort } from './applications/ports/client-persistence.port';
-import { ClientPersistenceAdapter } from './adapter/client-persistence.adapter';
 import { DatabaseModule } from '@shared/adapter/database/database.module';
+import { ClientController } from './adapter/http/controllers/createClient.controller';
+import { CreateClientUseCase } from './applications/services/createClientUseCase';
+import { CreateClientService } from './applications/services/createClient.service';
+import { ClientRepository } from './applications/ports/clientRepository';
+import { ClientPersistenceAdapter } from './adapter/persistance/database/prisma/repositories/primaClientRepository';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [ClientController],
   providers: [
     {
-      provide: SaveClientUseCase,
-      useClass: SaveClientService,
+      provide: CreateClientUseCase,
+      useClass: CreateClientService,
     },
     {
-      provide: ClientPersistencePort,
+      provide: ClientRepository,
       useClass: ClientPersistenceAdapter,
     },
   ],
