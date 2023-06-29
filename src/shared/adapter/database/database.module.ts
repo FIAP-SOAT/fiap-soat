@@ -4,10 +4,10 @@ import { CategoriesRepository } from '@modules/products/application/ports/catego
 import { ProductsRepository } from '@modules/products/application/ports/productsRepository';
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
-import { ClientPersistenceAdapter } from '@modules/client/adapter/client-persistence.adapter';
-import { ClientPersistencePort } from '@modules/client/applications/ports/client-persistence.port';
 import { OrdersRepository } from '@modules/orders/application/ports/ordersRepository';
 import { PrismaOrdersRepository } from '@modules/orders/adapter/persistance/database/prisma/repositories/prismaOrdersRepository';
+import { ClientRepository } from '@modules/client/applications/ports/clientRepository';
+import { ClientPersistenceAdapter } from '@modules/client/adapter/persistance/database/prisma/repositories/primaClientRepository';
 
 @Module({
   providers: [
@@ -21,7 +21,7 @@ import { PrismaOrdersRepository } from '@modules/orders/adapter/persistance/data
       useClass: PrismaProductsRepository,
     },
     {
-      provide: ClientPersistencePort,
+      provide: ClientRepository,
       useClass: ClientPersistenceAdapter,
     },
     {
@@ -33,7 +33,7 @@ import { PrismaOrdersRepository } from '@modules/orders/adapter/persistance/data
     PrismaService,
     CategoriesRepository,
     ProductsRepository,
-    ClientPersistencePort,
+    ClientRepository,
     OrdersRepository,
   ],
 })

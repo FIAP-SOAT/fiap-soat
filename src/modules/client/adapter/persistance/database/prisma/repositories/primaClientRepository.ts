@@ -1,10 +1,10 @@
+import { ClientRepository } from '@modules/client/applications/ports/clientRepository';
+import { Client } from '@modules/client/domain/client';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@shared/adapter/database/prisma/prisma.service';
-import { ClientPersistencePort } from '../applications/ports/client-persistence.port';
-import { Client } from '../domain/client';
 
 @Injectable()
-export class ClientPersistenceAdapter implements ClientPersistencePort {
+export class ClientPersistenceAdapter implements ClientRepository {
   constructor(private prisma: PrismaService) {}
 
   async persistClient(client: Client) {
@@ -18,6 +18,18 @@ export class ClientPersistenceAdapter implements ClientPersistencePort {
   async findById(id: string): Promise<Client> {
     const client = await this.prisma.client.findUnique({
       where: { id },
+    });
+
+    if (!client) {
+      return null;
+    }
+
+    return client;
+  }
+
+  async findByEmail(email: string): Promise<Client> {
+    const client = await this.prisma.client.findUnique({
+      where: { email },
     });
 
     if (!client) {
