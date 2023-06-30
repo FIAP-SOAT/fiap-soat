@@ -46,10 +46,10 @@ async function seedStatus() {
   });
 
   await prisma.status.upsert({
-    where: { description: ' Em preparação' },
+    where: { description: 'Em preparação' },
     update: {},
     create: {
-      description: ' Em preparação',
+      description: 'Em preparação',
     },
   });
 
