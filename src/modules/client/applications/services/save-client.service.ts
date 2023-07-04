@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SaveClientUseCase } from '../ports/saveClient.use-case';
-import { ClientPersistencePort } from '../ports/client-persistence.port';
+import { ClientPersistencePort } from '../ports/clientRepository.port';
 import { SaveClientCommand } from '../ports/saveClient.command';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@shared/adapter/database/prisma/prisma.service';
-import { ClientPersistencePort } from '../applications/ports/client-persistence.port';
+import { ClientPersistencePort } from '../applications/ports/clientRepository.port';
 import { Client } from '../domain/client';
 
 @Injectable()
