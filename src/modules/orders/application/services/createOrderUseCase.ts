@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common/enums';
 import { HttpException } from '@nestjs/common/exceptions';
 import { Order } from '@modules/orders/domain/order';
-import { ClientPersistencePort } from '@modules/client/applications/ports/client-persistence.port';
 import { ProductsRepository } from '@modules/products/application/ports/productsRepository';
 import { OrderProduct } from '@modules/orders/domain/orderProduct';
 import { OrdersRepository } from '../ports/ordersRepository';
+import { ClientRepository } from '@modules/client/applications/ports/clientRepository';
 
 interface IRequest {
   clientId: string;
@@ -22,7 +22,7 @@ interface IResponse {
 @Injectable()
 export class CreateOrderUseCase {
   constructor(
-    private clientsRepository: ClientPersistencePort,
+    private clientsRepository: ClientRepository,
     private productsRepository: ProductsRepository,
     private ordersRepository: OrdersRepository,
   ) {}

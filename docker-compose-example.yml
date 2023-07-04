@@ -1,0 +1,49 @@
+services:
+  app:
+    build: .
+    container_name: soat-server
+    restart: on-failure
+    depends_on:
+      - database-soat
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    networks:
+      - soat-network
+
+  database-soat:
+    image: postgres
+    container_name: database-soat
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=<DATABASE_USER>
+      - POSTGRES_PASSWORD=<DATABASE_PASSWORD>
+      - POSTGRES_DB=<DATABASE_NAME>
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - soat-network
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "<PG_LOGIN>"
+      PGADMIN_DEFAULT_PASSWORD: "<PG_PASSWORD>"
+    ports:
+      - "16543:80"
+    depends_on:
+      - database-soat
+    networks:
+      - soat-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks: 
+  soat-network:
+    driver: bridge
+
+

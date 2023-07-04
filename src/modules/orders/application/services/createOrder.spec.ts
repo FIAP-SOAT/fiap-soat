@@ -1,9 +1,9 @@
 import { InMemoryProductsRepository } from '@modules/products/adapter/persistance/inMemory/inMemoryProductsRepository';
 import { CreateOrderUseCase } from './createOrderUseCase';
 import { InMemoryOrdersRepository } from '@modules/orders/adapter/persistance/inMemory/inMemoryOrdersRepository';
-import { InMemoryClientsRepository } from '@modules/client/adapter/inMemoryClientsRepository';
 import { randomUUID } from 'node:crypto';
 import { makeProduct } from '@modules/products/domain/factories/ProductFactory';
+import { InMemoryClientsRepository } from '@modules/client/adapter/persistance/inMemory/inMemoryClientsRepository';
 
 let createOrderUseCase: CreateOrderUseCase;
 let inMemoryClientsRepository: InMemoryClientsRepository;
