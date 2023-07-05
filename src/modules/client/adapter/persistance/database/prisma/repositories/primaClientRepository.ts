@@ -38,4 +38,16 @@ export class ClientPersistenceAdapter implements ClientRepository {
 
     return client;
   }
+
+  async findByCpf(cpf: string): Promise<Client> {
+    const client = await this.prisma.client.findUnique({
+      where: { cpf },
+    });
+
+    if (!client) {
+      return null;
+    }
+
+    return client;
+  }
 }
