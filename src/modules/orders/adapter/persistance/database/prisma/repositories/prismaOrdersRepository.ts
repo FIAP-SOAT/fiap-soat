@@ -6,6 +6,7 @@ import { PrismaService } from '@shared/adapter/database/prisma/prisma.service';
 import { PrismaStatusMapper } from '../mappers/prismaStatusMapper';
 import { PrismaOrderMapper } from '../mappers/prismaOrderMapper';
 import { PrismaOrderProductMapper } from '../mappers/prismaOrderProductMapper';
+import { PrismaListOrderMapper } from '../mappers/prismaListOrderMapper';
 
 @Injectable()
 export class PrismaOrdersRepository implements OrdersRepository {
@@ -37,5 +38,25 @@ export class PrismaOrdersRepository implements OrdersRepository {
         },
       },
     });
+  }
+
+  async listAllOrders(): Promise<Order[]> {
+    const orders = await this.prisma.order.findMany({
+      include: {
+        OrderProduct: {
+          include: {
+            product: {
+              include: {
+                category: true,
+              },
+            },
+          },
+        },
+        client: true,
+        status: true,
+      },
+    });
+
+    return orders.map(PrismaListOrderMapper.toDomain);
   }
 }
