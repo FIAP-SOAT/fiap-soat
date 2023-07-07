@@ -8,10 +8,12 @@ export class CreateClientService implements CreateClientUseCase {
   constructor(private clientRepository: ClientRepository) {}
 
   async saveClient(command: CreateClientCommand) {
-    const clientAlreadyExist = this.clientRepository.findByEmail(command.email);
+    const clientAlreadyExist = await this.clientRepository.findByEmail(
+      command.email,
+    );
 
     if (clientAlreadyExist) {
-      return new BadRequestException('Cliente já cadastrado');
+      throw new BadRequestException('Cliente já cadastrado');
     }
 
     return this.clientRepository.persistClient(command);
