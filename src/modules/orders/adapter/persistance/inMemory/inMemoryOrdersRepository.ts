@@ -17,4 +17,16 @@ export class InMemoryOrdersRepository implements OrdersRepository {
   async create(order: Order): Promise<void> {
     this.orders.push(order);
   }
+
+  async listAllOrders(): Promise<Order[]> {
+    return this.orders;
+  }
+
+  async listOrders(status: string[]): Promise<Order[]> {
+    const orders = this.orders.filter((order) =>
+      status.includes(order.status.id),
+    );
+
+    return orders;
+  }
 }
