@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This backend application manages an order queue for a fast-food restaurant. It provides functionality to register customers, add new orders to the queue, and list existing orders. The application enables seamless order management, ensuring efficient processing and delivery of customer requests for the restaurant.
 
 ## Installation
 
@@ -33,6 +33,8 @@ $ npm install
 ```
 
 ## Running the app
+
+Copy and add enviroment variables from `.env.example` to `.env`.
 
 ```bash
 # development
@@ -45,28 +47,46 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running using Docker
+
+Build the Docker image by running the following command:
+
+```bash
+$ docker build .
+```
+
+Run the Docker image with the following command:
+
+```bash
+$ docker run <image_id>
+```
+
+## Running using Docker Compose
+
+To use Docker Compose to run the application, follow these steps:
+
+- Copy the `docker-compose-example.yml` file to `docker-compose.yml`.
+- Replace any missing environment variables in the `docker-compose.yml` file.
+- Run the following command to start the application using Docker Compose:
+
+```bash
+$ docker compose up
+```
+
 ## Test
 
 ```bash
 # unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+## API Documentation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The API documentation is available via OpenAPI (Swagger) at the following URL:
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+http://localhost:3000/api-docs
+```
 
 ## License
 
