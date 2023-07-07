@@ -8,7 +8,7 @@ export class OrderViewModel {
     return {
       id: order.id,
       fullPrice: order.fullPrice,
-      client: ClientViewModel.toHTTP(order.client),
+      client: order.client ? ClientViewModel.toHTTP(order.client) : undefined,
       status: StatusViewModel.toHTTP(order.status),
       products: order.products?.map(OrderProductViewModel.toHTTP),
       createdAt: order.createdAt,
